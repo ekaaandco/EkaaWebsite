@@ -1,0 +1,240 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- 1. Hero -->
+<section class="hero">
+  <div class="wrap hero__grid">
+    <div class="hero__copy reveal">
+      <p class="kicker">{{ c.hero.kicker }}</p>
+      <h1>{{ c.hero.heading }}</h1>
+      <p class="hero__sub">{{ c.hero.subheading }}</p>
+      <div class="hero__cta-row">
+        <a href="{{ whatsapp }}" class="btn btn--primary" target="_blank" rel="noopener">
+          {{ c.hero.cta }}
+        </a>
+        <a href="#process" class="btn btn--ghost">{{ c.hero.cta_secondary }}</a>
+      </div>
+    </div>
+    <div class="hero__media reveal">
+      <img src="{{ url_for('static', path=c.hero.image) }}" alt="{{ c.hero.image_alt }}" />
+    </div>
+  </div>
+</section>
+
+<!-- 2. Intro -->
+<section class="section section--intro intro" id="intro">
+  <div class="wrap intro__grid">
+    <div class="intro__copy reveal">
+      <h2>{{ c.intro.heading }}</h2>
+      <p>{{ c.intro.body }}</p>
+      <ul class="intro__stats">
+        {% for s in c.intro.stats %}
+        <li>{{ s }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="intro__media reveal">
+      <img src="{{ url_for('static', path=c.intro.image) }}" alt="{{ c.intro.image_alt }}" />
+    </div>
+  </div>
+</section>
+
+<!-- 3. Services -->
+<section class="section services" id="services">
+  <div class="wrap">
+    <div class="grid-head reveal">
+      <p class="kicker">{{ c.services.heading }}</p>
+      <h2 class="section-title">{{ c.services.intro }}</h2>
+    </div>
+    <div class="pillars reveal">
+      {% for p in c.services.pillars %}
+      <article class="pillar">
+        <div class="pillar__visual">
+          {% if p.image %}
+          <img src="{{ url_for('static', path=p.image) }}" alt="{{ p.image_alt }}" loading="lazy" />
+          {% else %}
+          <div class="pillar__icon" aria-hidden="true">
+            <!-- clipboard with checkmark, brand terracotta -->
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <rect x="11" y="9" width="26" height="32" rx="3" />
+              <path d="M19 9V7a2 2 0 012-2h6a2 2 0 012 2v2" />
+              <path d="M18 25.5l4.5 4.5L31 21.5" />
+            </svg>
+          </div>
+          {% endif %}
+        </div>
+        <div class="pillar__body">
+          <h3>{{ p.title }}</h3>
+          <p>{{ p.body }}</p>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- 4. Founder / Why Ekaa -->
+<section class="section founder" id="founder">
+  <div class="wrap founder__grid">
+    <div class="founder__media reveal">
+      <img src="{{ url_for('static', path=c.founder.image) }}" alt="{{ c.founder.image_alt }}" loading="lazy" />
+    </div>
+    <div class="founder__col reveal">
+      <p class="kicker">{{ c.founder.heading }}</p>
+      <h2 class="founder__name">{{ c.founder.name }}</h2>
+      <span class="founder__role">{{ c.founder.role }}</span>
+      <div class="founder__body">
+        <p>{{ c.founder.body }}</p>
+        <p class="founder__shift">{{ c.founder.body_2 }}</p>
+      </div>
+      <p class="founder__location">{{ c.founder.location }}</p>
+      <div class="founder__cta">
+        <a href="{{ whatsapp }}" class="btn btn--primary" target="_blank" rel="noopener">
+          {{ c.hero.cta }}
+        </a>
+        <a href="#services" class="link-arrow">See what we do</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. Work / gallery -->
+<section class="section section--work" id="work">
+  <div class="wrap">
+    <div class="grid-head reveal">
+      <p class="kicker">{{ c.gallery.heading }}</p>
+      <h2 class="section-title">{{ c.gallery.intro }}</h2>
+    </div>
+    {% if c.gallery.images %}
+    <div class="gallery-grid reveal">
+      {% for img in c.gallery.images %}
+      <img src="{{ url_for('static', path='gallery/' ~ img.file) }}"
+           alt="{{ img.alt | default('Ekaa wedding') }}" loading="lazy" />
+      {% endfor %}
+    </div>
+    <p class="gallery-follow reveal">
+      {{ c.gallery.followalong }}
+      <a href="{{ c.contact.instagram_url }}" target="_blank" rel="noopener">@{{ c.contact.instagram_handle }}</a>
+    </p>
+    {% else %}
+    <p class="gallery-follow reveal">
+      {{ c.gallery.followalong }}
+      <a href="{{ c.contact.instagram_url }}" target="_blank" rel="noopener">@{{ c.contact.instagram_handle }}</a>
+    </p>
+    {% endif %}
+  </div>
+</section>
+
+<!-- 6. Instagram strip (sits right after Our Work) -->
+<section class="section section--tight insta" id="instagram">
+  <div class="wrap reveal">
+    <p class="kicker">{{ c.instagram.heading }}</p>
+    <h2 class="section-title">{{ c.instagram.body }}</h2>
+    <a href="{{ c.contact.instagram_url }}" class="insta__handle" target="_blank" rel="noopener">
+      @{{ c.contact.instagram_handle }}
+    </a>
+    <div>
+      <a href="{{ c.contact.instagram_url }}" class="btn btn--ghost" target="_blank" rel="noopener">
+        {{ c.instagram.cta }}
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- 7. Process (How we work) -->
+<section class="section process" id="process">
+  <div class="wrap">
+    <div class="grid-head reveal">
+      <p class="kicker">{{ c.process.heading }}</p>
+      <h2 class="section-title">{{ c.process.intro }}</h2>
+    </div>
+    <div class="steps reveal">
+      {% for s in c.process.steps %}
+      <div class="step">
+        <div class="step__num">{{ s.number }}</div>
+        <h3>{{ s.title }}</h3>
+        <p>{{ s.body }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials (optional, hidden until added) -->
+{% if c.testimonials.quotes %}
+<section class="section" id="testimonials">
+  <div class="wrap">
+    <div class="grid-head reveal">
+      <p class="kicker">{{ c.testimonials.heading }}</p>
+    </div>
+    <div class="quotes reveal">
+      {% for t in c.testimonials.quotes %}
+      <figure class="quote">
+        <p>{{ t.quote }}</p>
+        <cite>{{ t.name }}{% if t.detail %}, {{ t.detail }}{% endif %}</cite>
+      </figure>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- 8. Enquiry / contact -->
+<section class="section enquiry" id="enquiry">
+  <div class="wrap enquiry__grid">
+    <div class="enquiry__intro reveal">
+      <p class="kicker">{{ c.enquiry.heading }}</p>
+      <h2 class="section-title">{{ c.enquiry.body }}</h2>
+      <div class="enquiry__direct">
+        <a class="direct-link direct-link--primary" href="{{ whatsapp }}" target="_blank" rel="noopener">
+          <span>{{ c.enquiry.whatsapp_label }}</span>
+          <strong>{{ c.contact.phone_display }}</strong>
+        </a>
+        <a class="direct-link" href="tel:+{{ c.contact.phone_e164 }}">
+          <span>{{ c.enquiry.call_label }}</span>
+          <strong>{{ c.contact.phone_display }}</strong>
+        </a>
+        <a class="direct-link" href="mailto:{{ c.contact.email }}">
+          <span>{{ c.enquiry.email_label }}</span>
+          <strong>{{ c.contact.email }}</strong>
+        </a>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <form class="form" action="/book" method="post">
+        <div class="field">
+          <label for="name">Your name</label>
+          <input type="text" id="name" name="name" required autocomplete="name" />
+        </div>
+        <div class="field">
+          <label for="contact">Phone or email</label>
+          <input type="text" id="contact" name="contact" required
+                 placeholder="So we can reply to you" />
+        </div>
+        <div class="field">
+          <label for="wedding_when">Wedding date or rough month</label>
+          <input type="text" id="wedding_when" name="wedding_when"
+                 placeholder="e.g. December 2026, or not sure yet" />
+        </div>
+        <div class="field">
+          <label for="city">City</label>
+          <input type="text" id="city" name="city" placeholder="Or 'still deciding'." />
+        </div>
+        <div class="field">
+          <label for="note">A few words about your wedding</label>
+          <textarea id="note" name="note" placeholder="Tell us anything that helps us understand your day."></textarea>
+        </div>
+        <button type="submit" class="btn btn--primary">Send enquiry</button>
+        <p class="form-nudge">
+          {{ c.enquiry.nudge }}
+          <a href="{{ whatsapp }}" target="_blank" rel="noopener">{{ c.enquiry.nudge_link }}</a>
+        </p>
+      </form>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

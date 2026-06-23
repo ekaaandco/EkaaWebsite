@@ -1,0 +1,38 @@
+# ===== Editor / tooling =====
+.claude/
+.vscode/
+.idea/
+*.swp
+
+# ===== macOS =====
+.DS_Store
+
+# ===== Python =====
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ===== Virtual environments =====
+.venv/
+venv/
+env/
+ENV/
+
+# ===== Environment / secrets =====
+.env
+.env.*
+!.env.example
+
+# ===== App runtime data =====
+data/enquiries.jsonl
+ekaaco/data/enquiries.jsonl
+
+# ===== Logs =====
+*.log

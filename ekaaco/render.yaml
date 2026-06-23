@@ -1,0 +1,14 @@
+# Render blueprint for Ekaa. Push this repo to GitHub, then in Render choose
+# "New > Blueprint" and point it at the repo. Render reads this file.
+services:
+  - type: web
+    name: ekaa
+    runtime: python
+    plan: starter            # cheap paid tier; "free" also works for a low traffic site
+    rootDir: ekaaco          # the app lives in the ekaaco/ subfolder
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    autoDeploy: true
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12.3"

@@ -1,0 +1,161 @@
+# =============================================================
+# Ekaa — editable site copy
+# Edit this file to change words on the site. No code needed.
+# HARD BRAND RULE: no hyphens and no em dashes anywhere in copy.
+# =============================================================
+
+brand:
+  name: "Ekaa"
+  full_name: "Ekaa, The Event Collective"
+  tagline: "Beyond events, we create memories"
+  base: "Mumbai"
+  area: "India"
+
+contact:
+  phone_display: "+91 99305 09101"
+  phone_e164: "919930509101"          # used for tel: and wa.me links
+  email: "ekaaandco@gmail.com"
+  instagram_handle: "ekaa_theeventcollective"
+  instagram_url: "https://www.instagram.com/ekaa_theeventcollective/"
+  whatsapp_opener: "Hi Ekaa, we are planning our wedding and would love to start a conversation."
+
+seo:
+  title: "Ekaa, The Event Collective | Wedding Planning in Mumbai"
+  description: "Ekaa is a Mumbai wedding planner that handles design, vendors, and execution so you can plan your wedding without the chaos. Beyond events, we create memories."
+  og_image: "/static/img/hero.jpg"
+  domain: "https://ekaa.in"
+
+hero:
+  kicker: "Wedding planning, Mumbai and across India"
+  heading: "Beyond events, we create memories"
+  subheading: "A calm, design led wedding partner who handles everything, built on real large event experience."
+  cta: "Start the conversation"
+  cta_secondary: "See how we work"
+  image: "img/hero.jpg"
+  image_alt: "An Ekaa wedding stage glowing under evening light, couple at the centre"
+
+intro:
+  heading: "Plan your wedding without the chaos"
+  body: >
+    Ekaa is a wedding planning company. We shape the design, bring together the
+    right vendors, and run the whole thing on the ground, so the two of you stay
+    present for the parts that matter. You enjoy your wedding. We carry the rest.
+  image: "img/intro-recce.jpg"
+  image_alt: "Ekaa on a venue recce, planning on the ground before the day"
+  stats:
+    - "One Project Head, start to end."
+    - "Fewer weddings each season."
+    - "Transparent commercials, no padding."
+
+services:
+  heading: "What we do"
+  intro: "Everything a wedding needs, held in one calm pair of hands."
+  pillars:
+    - title: "Design and styling"
+      body: "A look and feel that is yours. Mood, colour, decor, and the small details that make a day feel considered rather than copied."
+      image: "img/pillar-design.jpg"
+      image_alt: "A styled wedding stage with terracotta drapes and floral mandap circles"
+    - title: "Vendor curation and management"
+      body: "The right people for your budget and taste. We find them, brief them, negotiate, and keep everyone moving so you do not have to chase anyone."
+      icon: "handshake"   # no photo yet, uses a terracotta line icon
+    - title: "Full on ground execution"
+      body: "A team that runs the day end to end. Timelines, logistics, and quiet problem solving, so nothing reaches you on the day itself. Across Mumbai, India, and destination."
+      image: "img/pillar-execution.jpg"
+      image_alt: "Couple on stage with fireworks during an Ekaa wedding"
+    - title: "Pre-wedding and the small days"
+      body: "The sangeet you actually want to dance at. The mehendi that feels like home. The cocktail that does not run out of ice. The smaller days, planned with the same care as the wedding day itself."
+      image: "img/pillar-prewedding.jpg"
+      image_alt: "A pastel pre-wedding celebration set up by Ekaa"
+
+founder:
+  heading: "Meet the founder"
+  name: "Ishaan Saklecha"
+  role: "Founder"
+  image: "img/founder.jpg"
+  image_alt: "Ishaan Saklecha, founder of Ekaa, at a wedding venue"
+  body: >
+    I started Ekaa because a wedding deserves the same rigour as the biggest
+    shows in the country. I spent years running large scale live events at
+    BookMyShow Live, including the Coldplay India tour and two editions of
+    Lollapalooza India. Tens of thousands of people, hundreds of moving parts,
+    no room for error.
+  body_2: >
+    A wedding is smaller in headcount and far more personal, and it needs that
+    same calm and control. That is what I bring. You get someone who has stood
+    in the middle of real chaos and kept it invisible to everyone watching. On
+    your wedding, the only thing you should feel is the day itself.
+  location: "Mumbai. Available across India."
+
+process:
+  heading: "How we work"
+  intro: "A clear path from first hello to the last dance."
+  steps:
+    - number: "01"
+      title: "First conversation"
+      body: "We meet, we listen, and we understand the wedding you actually want and the budget you are working with."
+    - number: "02"
+      title: "Design and planning"
+      body: "We build the look, the plan, and the timeline. You see where everything is going before anything is booked."
+    - number: "03"
+      title: "Vendor lock in"
+      body: "We bring the right vendors, handle the briefs and the commercials, and confirm every detail."
+    - number: "04"
+      title: "Flawless execution"
+      body: "Our team runs the day on the ground. You stay present. We stay invisible."
+
+gallery:
+  heading: "Our work"
+  # Soft, honest headline while the portfolio is still growing.
+  # Once more weddings are delivered, swap to: "A look at the weddings we have shaped."
+  intro: "Building quietly."
+  followalong: "For now, see the freshest work on Instagram."
+  # Drop images into app/static/gallery/ and list the filenames here.
+  # Each block repeats automatically. Leave empty to hide the section.
+  images:
+    - file: "work-01.jpg"
+      alt: "Daytime wedding stage with palm tree and gold bow chairs"
+    - file: "work-02.jpg"
+      alt: "Night ceremony, couple on stage with sparklers"
+    - file: "work-03.jpg"
+      alt: "Fireworks moment, bride and groom on stage"
+    - file: "work-04.jpg"
+      alt: "Mandap with gold and pink florals"
+    - file: "work-05.jpg"
+      alt: "Guest entry pathway with arches and trees"
+    - file: "work-06.jpg"
+      alt: "Stage close up with deer and pink garlands"
+    - file: "work-07.jpg"
+      alt: "Haldi setup with yellow garlands and banana leaves"
+    - file: "work-08.jpg"
+      alt: "Sangeet and mehendi seating in pastel tones"
+
+testimonials:
+  heading: "In their words"
+  # Add testimonials here as they come in. Leave empty to hide the section.
+  quotes: []
+    # - quote: "They took every bit of stress off us."
+    #   name: "A and R"
+    #   detail: "Mumbai, 2025"
+
+instagram:
+  heading: "Follow along"
+  body: "Most of our newest work lives on Instagram. Come see what we are building."
+  cta: "Visit our Instagram"
+
+enquiry:
+  heading: "Start the conversation"
+  body: "Tell us a little about your wedding. We will reply personally, usually within a day."
+  whatsapp_label: "Message on WhatsApp"
+  call_label: "Request a call"
+  email_label: "Email us"
+  nudge: "Prefer to chat now?"
+  nudge_link: "Message us on WhatsApp"
+  success: "Thank you. Your message has reached us and we will be in touch very soon."
+
+beyond:
+  text: >
+    Ekaa also takes on select brand and corporate experiences, drawing on a live
+    events background in large format production.
+
+footer:
+  copyright: "Ekaa, The Event Collective"

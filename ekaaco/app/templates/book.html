@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Start the conversation | {{ c.brand.full_name }}{% endblock %}
+
+{% block content %}
+<section class="section enquiry" style="padding-top: clamp(4rem, 10vw, 7rem);">
+  <div class="wrap enquiry__grid">
+    <div class="enquiry__intro reveal">
+      <p class="kicker">{{ c.enquiry.heading }}</p>
+      <h2 class="section-title">{{ c.enquiry.body }}</h2>
+      <div class="enquiry__direct">
+        <a class="direct-link direct-link--primary" href="{{ whatsapp }}" target="_blank" rel="noopener">
+          <span>{{ c.enquiry.whatsapp_label }}</span>
+          <strong>{{ c.contact.phone_display }}</strong>
+        </a>
+        <a class="direct-link" href="tel:+{{ c.contact.phone_e164 }}">
+          <span>{{ c.enquiry.call_label }}</span>
+          <strong>{{ c.contact.phone_display }}</strong>
+        </a>
+        <a class="direct-link" href="mailto:{{ c.contact.email }}">
+          <span>{{ c.enquiry.email_label }}</span>
+          <strong>{{ c.contact.email }}</strong>
+        </a>
+      </div>
+    </div>
+
+    <div class="reveal">
+      {% if sent %}
+      <div class="notice">{{ c.enquiry.success }}</div>
+      <a href="/" class="btn btn--ghost">Back to home</a>
+      {% else %}
+      <form class="form" action="/book" method="post">
+        <div class="field">
+          <label for="name">Your name</label>
+          <input type="text" id="name" name="name" required autocomplete="name" />
+        </div>
+        <div class="field">
+          <label for="contact">Phone or email</label>
+          <input type="text" id="contact" name="contact" required
+                 placeholder="So we can reply to you" />
+        </div>
+        <div class="field">
+          <label for="wedding_when">Wedding date or rough month</label>
+          <input type="text" id="wedding_when" name="wedding_when"
+                 placeholder="e.g. December 2026, or not sure yet" />
+        </div>
+        <div class="field">
+          <label for="city">City</label>
+          <input type="text" id="city" name="city" placeholder="Or 'still deciding'." />
+        </div>
+        <div class="field">
+          <label for="note">A few words about your wedding</label>
+          <textarea id="note" name="note"></textarea>
+        </div>
+        <button type="submit" class="btn btn--primary">Send enquiry</button>
+        <p class="form-nudge">
+          {{ c.enquiry.nudge }}
+          <a href="{{ whatsapp }}" target="_blank" rel="noopener">{{ c.enquiry.nudge_link }}</a>
+        </p>
+      </form>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}
