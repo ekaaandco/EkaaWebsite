@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Contact | {{ c.brand.full_name }}{% endblock %}
+
+{% block content %}
+<section class="section" style="padding-top: clamp(4rem, 10vw, 7rem);">
+  <div class="wrap">
+    <div class="grid-head reveal">
+      <p class="kicker">Say hello</p>
+      <h2 class="section-title">Let us plan something memorable together.</h2>
+      <p class="lead">Based in {{ c.brand.base }}, {{ c.brand.area }}. We plan weddings across India, including destination.</p>
+    </div>
+
+    <div class="enquiry__direct reveal" style="max-width: 520px;">
+      <a class="direct-link" href="{{ whatsapp }}" target="_blank" rel="noopener">
+        <span>{{ c.enquiry.whatsapp_label }}</span>
+        <strong>{{ c.contact.phone_display }}</strong>
+      </a>
+      <a class="direct-link" href="tel:+{{ c.contact.phone_e164 }}">
+        <span>{{ c.enquiry.call_label }}</span>
+        <strong>{{ c.contact.phone_display }}</strong>
+      </a>
+      <a class="direct-link" href="mailto:{{ c.contact.email }}">
+        <span>{{ c.enquiry.email_label }}</span>
+        <strong>{{ c.contact.email }}</strong>
+      </a>
+      <a class="direct-link" href="{{ c.contact.instagram_url }}" target="_blank" rel="noopener">
+        <span>Instagram</span>
+        <strong>@{{ c.contact.instagram_handle }}</strong>
+      </a>
+    </div>
+
+    <div class="reveal" style="margin-top: 2.5rem;">
+      <a href="/book" class="btn btn--primary">{{ c.hero.cta }}</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

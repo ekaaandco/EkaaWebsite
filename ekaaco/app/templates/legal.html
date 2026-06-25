@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page_title }} | {{ c.brand.full_name }}{% endblock %}
+
+{% block content %}
+<section class="section legal" style="padding-top: clamp(4rem, 10vw, 7rem);">
+  <div class="wrap legal__wrap reveal">
+    <p class="kicker">{{ page_title }}</p>
+    <h1 class="section-title">{{ page_heading }}</h1>
+    {% for para in body %}
+    <p>{{ para }}</p>
+    {% endfor %}
+    <p class="legal__contact">
+      Questions? Write to
+      <a href="mailto:{{ c.contact.email }}">{{ c.contact.email }}</a>.
+    </p>
+    <a href="/" class="link-arrow">Back to home</a>
+  </div>
+</section>
+{% endblock %}
