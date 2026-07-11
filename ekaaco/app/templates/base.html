@@ -17,7 +17,8 @@
   <meta property="og:url" content="{{ c.seo.domain }}" />
   <meta name="twitter:card" content="summary_large_image" />
 
-  <link rel="icon" href="{{ url_for('static', path='img/ekaa-logo.png') }}" />
+  <link rel="icon" type="image/png" href="{{ url_for('static', path='img/favicon.png') }}" />
+  <link rel="apple-touch-icon" href="{{ url_for('static', path='img/favicon.png') }}" />
 
   <!-- Fonts: preconnect then load Cormorant Garamond + DM Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -55,7 +56,7 @@
   <footer class="site-footer">
     <div class="wrap footer__grid footer">
       <div>
-        <img class="footer__logo" src="{{ url_for('static', path='img/ekaa-logo-footer.png') }}" alt="Ekaa, The Event Collective" />
+        <img class="footer__logo" src="{{ url_for('static', path='img/ekaa-logo.png') }}" alt="Ekaa, The Event Collective" />
         <p class="footer__tag">{{ c.brand.tagline }}</p>
       </div>
       <div>
