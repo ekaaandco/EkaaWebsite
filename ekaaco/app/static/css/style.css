@@ -785,10 +785,43 @@ p {
 }
 
 .field input:focus,
-.field textarea:focus {
+.field textarea:focus,
+.phone-cc:focus {
   outline: none;
   border-color: var(--terracotta);
   box-shadow: 0 0 0 3px rgba(193, 122, 90, 0.15);
+}
+
+/* optional label hint, softer than the uppercase label */
+.field-optional {
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 400;
+  color: rgba(44, 44, 44, 0.45);
+}
+
+/* phone: country-code select sits beside the 10 digit number */
+.phone-input {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.phone-cc {
+  flex: 0 0 auto;
+  width: auto;
+  font-family: "DM Sans", sans-serif;
+  font-size: 1rem;
+  color: var(--charcoal);
+  background: var(--ivory);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 0.85rem 0.75rem;
+  cursor: pointer;
+}
+
+.phone-input .phone-number {
+  flex: 1;
+  min-width: 0;
 }
 
 .field textarea {

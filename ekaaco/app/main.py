@@ -7,7 +7,11 @@ All visible copy lives in content.yaml so it can be edited without touching code
 from __future__ import annotations
 
 import json
+import os
+import urllib.error
+import urllib.request
 from datetime import datetime
+from html import escape as html_escape
 from pathlib import Path
 from urllib.parse import quote
 
@@ -16,11 +20,75 @@ from fastapi import FastAPI, Form, Request
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from starlette.concurrency import run_in_threadpool
 
 BASE_DIR = Path(__file__).resolve().parent
 DATA_DIR = BASE_DIR.parent / "data"
 DATA_DIR.mkdir(exist_ok=True)
 ENQUIRIES_FILE = DATA_DIR / "enquiries.jsonl"
+
+# Email delivery (Resend). Set these as environment variables in the host.
+# If RESEND_API_KEY is unset (e.g. local dev), sending is skipped and the
+# enquiry is still saved to the file, so nothing breaks.
+RESEND_API_KEY = os.getenv("RESEND_API_KEY", "")
+ENQUIRY_TO = os.getenv("ENQUIRY_TO", "ekaaandco@gmail.com")
+# Until ekaaco.in is verified in Resend, use their shared sender.
+ENQUIRY_FROM = os.getenv("ENQUIRY_FROM", "Ekaa Enquiries <onboarding@resend.dev>")
+
+
+def send_enquiry_email(record: dict) -> None:
+    """Email a new enquiry via Resend. Raises on failure so the caller can log it."""
+    if not RESEND_API_KEY:
+        print("[enquiry] RESEND_API_KEY not set; saved to file only, no email sent")
+        return
+
+    rows = [
+        ("Name", record.get("name")),
+        ("Phone", record.get("phone")),
+        ("Email", record.get("email") or "(not provided)"),
+        ("Wedding date", record.get("wedding_when") or "(not provided)"),
+        ("City", record.get("city") or "(not provided)"),
+        ("Note", record.get("note") or "(none)"),
+        ("Received", record.get("received")),
+    ]
+    html_rows = "".join(
+        f"<p style='margin:0 0 8px'><strong>{html_escape(label)}:</strong> "
+        f"{html_escape(str(value))}</p>"
+        for label, value in rows
+    )
+    html_body = (
+        "<div style=\"font-family:Arial,sans-serif;color:#2c2c2c\">"
+        "<h2 style=\"margin:0 0 12px\">New wedding enquiry</h2>"
+        f"{html_rows}</div>"
+    )
+
+    payload = {
+        "from": ENQUIRY_FROM,
+        "to": [ENQUIRY_TO],
+        "subject": f"New wedding enquiry from {record.get('name', 'someone')}",
+        "html": html_body,
+    }
+    # So the client can just hit Reply to answer the couple directly.
+    if record.get("email"):
+        payload["reply_to"] = record["email"]
+
+    req = urllib.request.Request(
+        "https://api.resend.com/emails",
+        data=json.dumps(payload).encode("utf-8"),
+        headers={
+            "Authorization": f"Bearer {RESEND_API_KEY}",
+            "Content-Type": "application/json",
+        },
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            resp.read()
+        print("[enquiry] email sent to", ENQUIRY_TO)
+    except urllib.error.HTTPError as exc:
+        body = exc.read().decode("utf-8", "ignore")
+        print(f"[enquiry] Resend error {exc.code}: {body}")
+        raise
 
 app = FastAPI(title="Ekaa — The Event Collective")
 app.mount("/static", StaticFiles(directory=BASE_DIR / "static"), name="static")
@@ -80,7 +148,9 @@ async def book(request: Request, sent: bool = False):
 async def book_submit(
     request: Request,
     name: str = Form(...),
-    contact: str = Form(...),
+    phone: str = Form(...),
+    country_code: str = Form("+91"),
+    email: str = Form(""),
     wedding_when: str = Form(""),
     city: str = Form(""),
     note: str = Form(""),
@@ -90,16 +160,30 @@ async def book_submit(
     Enquiries are appended to data/enquiries.jsonl. Wiring this to email
     (ekaaandco@gmail.com) or a form service is a later, low effort step.
     """
+    phone_digits = "".join(ch for ch in phone if ch.isdigit())
+    full_phone = f"{country_code.strip()} {phone_digits}".strip()
     record = {
         "received": datetime.now().isoformat(timespec="seconds"),
         "name": name.strip(),
-        "contact": contact.strip(),
+        "phone": full_phone,
+        "email": email.strip(),
         "wedding_when": wedding_when.strip(),
         "city": city.strip(),
         "note": note.strip(),
     }
-    with open(ENQUIRIES_FILE, "a", encoding="utf-8") as fh:
-        fh.write(json.dumps(record, ensure_ascii=False) + "\n")
+    # Keep a local copy (best effort; the host filesystem may be ephemeral).
+    try:
+        with open(ENQUIRIES_FILE, "a", encoding="utf-8") as fh:
+            fh.write(json.dumps(record, ensure_ascii=False) + "\n")
+    except OSError as exc:
+        print(f"[enquiry] could not write file: {exc}")
+
+    # Email the enquiry. A failure here must never break the visitor's submission.
+    try:
+        await run_in_threadpool(send_enquiry_email, record)
+    except Exception as exc:  # noqa: BLE001 - deliberately broad, delivery is best effort
+        print(f"[enquiry] email send failed: {exc}")
+
     return RedirectResponse(url="/book?sent=true", status_code=303)
 
 
