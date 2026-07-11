@@ -56,7 +56,8 @@ services:
       image_alt: "A styled wedding stage with terracotta drapes and floral mandap circles"
     - title: "Vendor curation and management"
       body: "The right people for your budget and taste. We find them, brief them, negotiate, and keep everyone moving so you do not have to chase anyone."
-      icon: "handshake"   # no photo yet, uses a terracotta line icon
+      image: "img/pillar-vendor.jpg"
+      image_alt: "Ekaa coordinating with the team and vendors on the ground at a venue"
     - title: "Full on ground execution"
       body: "A team that runs the day end to end. Timelines, logistics, and quiet problem solving, so nothing reaches you on the day itself. Across Mumbai, India, and destination."
       image: "img/pillar-execution.jpg"
