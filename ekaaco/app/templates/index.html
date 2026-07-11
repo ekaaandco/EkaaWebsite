@@ -114,15 +114,6 @@
            alt="{{ img.alt | default('Ekaa wedding') }}" loading="lazy" />
       {% endfor %}
     </div>
-    <p class="gallery-follow reveal">
-      {{ c.gallery.followalong }}
-      <a href="{{ c.contact.instagram_url }}" target="_blank" rel="noopener">@{{ c.contact.instagram_handle }}</a>
-    </p>
-    {% else %}
-    <p class="gallery-follow reveal">
-      {{ c.gallery.followalong }}
-      <a href="{{ c.contact.instagram_url }}" target="_blank" rel="noopener">@{{ c.contact.instagram_handle }}</a>
-    </p>
     {% endif %}
   </div>
 </section>
