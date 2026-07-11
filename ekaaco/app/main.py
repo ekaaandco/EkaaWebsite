@@ -80,7 +80,9 @@ async def book(request: Request, sent: bool = False):
 async def book_submit(
     request: Request,
     name: str = Form(...),
-    contact: str = Form(...),
+    phone: str = Form(...),
+    country_code: str = Form("+91"),
+    email: str = Form(""),
     wedding_when: str = Form(""),
     city: str = Form(""),
     note: str = Form(""),
@@ -90,10 +92,13 @@ async def book_submit(
     Enquiries are appended to data/enquiries.jsonl. Wiring this to email
     (ekaaandco@gmail.com) or a form service is a later, low effort step.
     """
+    phone_digits = "".join(ch for ch in phone if ch.isdigit())
+    full_phone = f"{country_code.strip()} {phone_digits}".strip()
     record = {
         "received": datetime.now().isoformat(timespec="seconds"),
         "name": name.strip(),
-        "contact": contact.strip(),
+        "phone": full_phone,
+        "email": email.strip(),
         "wedding_when": wedding_when.strip(),
         "city": city.strip(),
         "note": note.strip(),
