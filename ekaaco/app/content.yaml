@@ -57,7 +57,7 @@ services:
     - title: "Vendor curation and management"
       body: "The right people for your budget and taste. We find them, brief them, negotiate, and keep everyone moving so you do not have to chase anyone."
       image: "img/pillar-vendor.jpg"
-      image_alt: "Ekaa coordinating with the team and vendors on the ground at a venue"
+      image_alt: "Wedding planning laid out in detail, from budget and guest list to vendor comparison and seating"
     - title: "Full on ground execution"
       body: "A team that runs the day end to end. Timelines, logistics, and quiet problem solving, so nothing reaches you on the day itself. Across Mumbai, India, and destination."
       image: "img/pillar-execution.jpg"
