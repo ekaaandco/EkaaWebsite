@@ -892,8 +892,12 @@ p {
 }
 
 .footer__logo {
-  height: 64px;
+  height: 68px;
   width: auto;
+  /* same navy logo as the nav, on an ivory chip so it reads on the dark footer */
+  background: var(--ivory);
+  padding: 10px 14px;
+  border-radius: 12px;
 }
 
 .footer__tag {
