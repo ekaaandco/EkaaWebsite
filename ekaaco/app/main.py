@@ -78,6 +78,10 @@ def send_enquiry_email(record: dict) -> None:
         headers={
             "Authorization": f"Bearer {RESEND_API_KEY}",
             "Content-Type": "application/json",
+            # Cloudflare (in front of the Resend API) blocks the default
+            # "Python-urllib" user agent with error 1010, so set a real one.
+            "User-Agent": "EkaaWebsite/1.0 (+https://ekaaco.in)",
+            "Accept": "application/json",
         },
         method="POST",
     )
