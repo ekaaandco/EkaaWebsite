@@ -12,8 +12,8 @@ brand:
   area: "India"
 
 contact:
-  phone_display: "+91 99305 09101"
-  phone_e164: "919930509101"          # used for tel: and wa.me links
+  phone_display: "+91 81694 66480"
+  phone_e164: "918169466480"          # used for tel: and wa.me links
   email: "ekaaandco@gmail.com"
   instagram_handle: "ekaa_theeventcollective"
   instagram_url: "https://www.instagram.com/ekaa_theeventcollective/"
